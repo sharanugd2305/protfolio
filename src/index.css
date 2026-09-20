@@ -1,0 +1,182 @@
+@import "tailwindcss";
+
+/* ─── Theme tokens (Tailwind v4 CSS-first config) ─── */
+@theme {
+  --font-sans: "Inter", ui-sans-serif, system-ui, sans-serif;
+  --font-mono: "JetBrains Mono", ui-monospace, monospace;
+
+  --color-base-950: #05050a;
+  --color-base-900: #0a0a0f;
+  --color-base-850: #0f0f16;
+  --color-base-800: #14141d;
+  --color-base-700: #1c1c28;
+  --color-base-600: #2a2a38;
+  --color-base-500: #3a3a4a;
+  --color-base-400: #6b6b80;
+  --color-base-300: #9494a8;
+  --color-base-200: #c4c4d4;
+  --color-base-100: #e8e8f0;
+  --color-base-50: #f4f4f8;
+
+  --color-accent: #14b8a6;
+  --color-accent-light: #2dd4bf;
+  --color-accent-dark: #0d9488;
+  --color-accent-muted: rgba(20, 184, 166, 0.12);
+
+  --color-secondary: #6366f1;
+  --color-secondary-muted: rgba(99, 102, 241, 0.12);
+
+  --color-danger: #ef4444;
+  --color-success: #22c55e;
+}
+
+/* ─── Base ─── */
+html {
+  scroll-behavior: smooth;
+  scroll-padding-top: 5rem;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  html {
+    scroll-behavior: auto;
+  }
+}
+
+body {
+  font-family: var(--font-sans);
+  background-color: var(--color-base-900);
+  color: var(--color-base-100);
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  line-height: 1.7;
+}
+
+::selection {
+  background-color: rgba(20, 184, 166, 0.3);
+  color: #fff;
+}
+
+/* Focus ring utility */
+*:focus-visible {
+  outline: 2px solid var(--color-accent);
+  outline-offset: 2px;
+  border-radius: 4px;
+}
+
+/* ─── Scroll reveal ─── */
+.reveal {
+  opacity: 0;
+  transform: translateY(24px);
+  transition: opacity 0.6s cubic-bezier(0.16, 1, 0.3, 1),
+              transform 0.6s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.reveal.revealed {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .reveal {
+    opacity: 1;
+    transform: none;
+    transition: none;
+  }
+}
+
+/* ─── Grid background pattern ─── */
+.bg-grid {
+  background-image:
+    linear-gradient(rgba(20, 184, 166, 0.03) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(20, 184, 166, 0.03) 1px, transparent 1px);
+  background-size: 48px 48px;
+}
+
+/* ─── Custom scrollbar ─── */
+::-webkit-scrollbar {
+  width: 6px;
+}
+::-webkit-scrollbar-track {
+  background: var(--color-base-900);
+}
+::-webkit-scrollbar-thumb {
+  background: var(--color-base-600);
+  border-radius: 3px;
+}
+::-webkit-scrollbar-thumb:hover {
+  background: var(--color-base-500);
+}
+
+/* ─── Hero animations ─── */
+@keyframes fadeInUp {
+  from {
+    opacity: 0;
+    transform: translateY(20px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes fadeIn {
+  from { opacity: 0; }
+  to { opacity: 1; }
+}
+
+@keyframes slideInRight {
+  from {
+    opacity: 0;
+    transform: translateX(-16px);
+  }
+  to {
+    opacity: 1;
+    transform: translateX(0);
+  }
+}
+
+@keyframes blink {
+  0%, 100% { opacity: 1; }
+  50% { opacity: 0; }
+}
+
+@keyframes float {
+  0%, 100% { transform: translateY(0) rotate(0deg); }
+  50% { transform: translateY(-8px) rotate(2deg); }
+}
+
+@keyframes pulse-glow {
+  0%, 100% { opacity: 0.4; }
+  50% { opacity: 0.8; }
+}
+
+.animate-fade-in-up {
+  animation: fadeInUp 0.7s cubic-bezier(0.16, 1, 0.3, 1) both;
+}
+
+.animate-fade-in {
+  animation: fadeIn 0.6s ease both;
+}
+
+.animate-slide-in {
+  animation: slideInRight 0.5s cubic-bezier(0.16, 1, 0.3, 1) both;
+}
+
+.animate-blink {
+  animation: blink 1s step-end infinite;
+}
+
+.animate-float {
+  animation: float 6s ease-in-out infinite;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .animate-fade-in-up,
+  .animate-fade-in,
+  .animate-slide-in,
+  .animate-float {
+    animation: none;
+    opacity: 1;
+    transform: none;
+  }
+}
