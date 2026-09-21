@@ -1,19 +1,15 @@
-import { useState } from "react";
 import { useScrollReveal } from "../hooks/useScrollReveal";
-import { techCategories } from "../data/techStack";
-import SkillCategory from "./SkillCategory";
+import { skills } from "../data/techStack";
 
 export default function TechStack({ highlightedTech, onTechClick }) {
   const ref = useScrollReveal();
-  const [activeTab, setActiveTab] = useState(0);
 
-  const handleTechClick = (techName) => {
+  const handleClick = (techName) => {
     // Toggle: if already highlighted, clear it; otherwise set it
     if (highlightedTech?.toLowerCase() === techName.toLowerCase()) {
       onTechClick(null);
     } else {
       onTechClick(techName);
-      // Scroll to projects after a brief delay
       setTimeout(() => {
         document.getElementById("projects")?.scrollIntoView({ behavior: "smooth" });
       }, 200);
@@ -28,44 +24,49 @@ export default function TechStack({ highlightedTech, onTechClick }) {
             Tech Stack
           </h2>
           <h3 className="text-3xl sm:text-4xl font-bold text-base-50">
-            Technologies I Work With
+            Skills & Technologies
           </h3>
           <p className="mt-3 text-base-400 text-sm max-w-xl">
             Click any technology to see related projects.
           </p>
         </div>
 
-        {/* Category tabs */}
-        <div className="reveal mb-8 overflow-x-auto pb-2 -mx-5 px-5 scrollbar-none">
-          <div className="flex gap-2 min-w-max">
-            {techCategories.map((cat, i) => (
+        {/* Skills grid */}
+        <div className="reveal grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-5 xl:grid-cols-6 gap-3">
+          {skills.map((skill) => {
+            const isActive =
+              highlightedTech &&
+              skill.name.toLowerCase() === highlightedTech.toLowerCase();
+            return (
               <button
-                key={cat.name}
-                onClick={() => setActiveTab(i)}
-                className={`flex items-center gap-2 px-4 py-2.5 text-sm font-medium rounded-xl transition-all duration-200 whitespace-nowrap ${
-                  activeTab === i
-                    ? "bg-accent/12 text-accent border border-accent/20"
-                    : "text-base-400 bg-base-800/40 border border-base-700/40 hover:text-base-200 hover:border-base-600"
+                key={skill.name}
+                onClick={() => handleClick(skill.name)}
+                className={`group relative flex items-center gap-2.5 p-3.5 rounded-xl border transition-all duration-200 text-left cursor-pointer ${
+                  isActive
+                    ? "bg-accent/10 border-accent/30 text-accent"
+                    : "bg-base-800/40 border-base-700/40 text-base-300 hover:border-base-500 hover:text-base-100 hover:bg-base-800/70 hover:-translate-y-0.5"
                 }`}
-                aria-pressed={activeTab === i}
+                title={`View projects using ${skill.name}`}
               >
-                <span aria-hidden="true">{cat.icon}</span>
-                {cat.name}
+                {/* Hover glow */}
+                <span className="absolute inset-0 rounded-xl bg-accent/[0.03] opacity-0 group-hover:opacity-100 transition-opacity duration-300 pointer-events-none" />
+
+                <span className="text-lg shrink-0 relative" aria-hidden="true">
+                  {skill.icon}
+                </span>
+                <span className="text-sm font-medium truncate relative">
+                  {skill.name}
+                </span>
+
+                {isActive && (
+                  <span className="absolute top-2 right-2 w-1.5 h-1.5 bg-accent rounded-full" />
+                )}
               </button>
-            ))}
-          </div>
+            );
+          })}
         </div>
 
-        {/* Active category items */}
-        <div className="reveal">
-          <SkillCategory
-            category={techCategories[activeTab]}
-            onTechClick={handleTechClick}
-            highlightedTech={highlightedTech}
-          />
-        </div>
-
-        {/* Clear highlight */}
+        {/* Clear filter */}
         {highlightedTech && (
           <div className="mt-6 text-center animate-fade-in">
             <button
