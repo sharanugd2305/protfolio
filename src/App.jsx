@@ -7,7 +7,6 @@ import AboutPreview from "./components/AboutPreview";
 import Education from "./components/Education";
 import Certifications from "./components/Certifications";
 import CurrentFocus from "./components/CurrentFocus";
-import DevTerminal from "./components/DevTerminal";
 import Projects from "./components/Projects";
 import TechStack from "./components/TechStack";
 import Contact from "./components/Contact";
@@ -29,7 +28,6 @@ export default function App() {
         <Education />
         <Certifications />
         <CurrentFocus />
-        <DevTerminal />
 
         {/* ─── Projects Section ─── */}
         <Projects highlightedTech={highlightedTech} />
