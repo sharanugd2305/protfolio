@@ -28,19 +28,18 @@ export default function OverviewCards() {
 
   return (
     <div ref={ref} className="mx-auto max-w-6xl px-5 py-16">
-      <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4">
+      <div className="grid grid-cols-1 gap-4 sm:grid-cols-2 lg:grid-cols-4">
         {CARDS.map((card, i) => (
           <div
             key={card.title}
-            className="reveal group relative p-5 bg-base-800/50 border border-base-700/50 rounded-xl hover:border-accent/30 hover:-translate-y-1 transition-all duration-300 cursor-default"
+            className="reveal group relative overflow-hidden rounded-[22px] border border-base-700/50 bg-base-800/50 p-5 transition-all duration-300 hover:-translate-y-1 hover:border-accent/30 cursor-default"
             style={{ transitionDelay: `${i * 60}ms` }}
           >
-            {/* Hover glow */}
-            <div className="absolute inset-0 rounded-xl bg-accent/[0.03] opacity-0 group-hover:opacity-100 transition-opacity duration-300" />
+            <div className="absolute inset-0 bg-[radial-gradient(circle_at_top,_rgba(34,211,197,0.10),_transparent_45%)] opacity-0 transition-opacity duration-300 group-hover:opacity-100" />
             <div className="relative">
-              <span className="text-2xl mb-3 block" aria-hidden="true">{card.icon}</span>
-              <h3 className="text-sm font-semibold text-base-200 mb-1">{card.title}</h3>
-              <p className="text-sm text-base-400 leading-relaxed">{card.description}</p>
+              <span className="mb-3 block text-2xl" aria-hidden="true">{card.icon}</span>
+              <h3 className="mb-1 text-sm font-semibold text-base-200">{card.title}</h3>
+              <p className="text-sm leading-relaxed text-base-400">{card.description}</p>
             </div>
           </div>
         ))}
