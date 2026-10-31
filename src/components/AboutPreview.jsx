@@ -67,7 +67,7 @@ export default function AboutPreview() {
               {ABOUT_POINTS.map((point, index) => (
                 <div
                   key={index}
-                  className="rounded-[22px] border border-base-700/60 bg-base-950/45 p-4 text-sm leading-relaxed text-base-300 transition-colors hover:border-accent/20 hover:bg-base-900/50"
+                  className="about-point rounded-[22px] border border-base-700/60 bg-base-950/45 p-4 text-sm leading-relaxed text-base-300 transition-colors hover:border-accent/20 hover:bg-base-900/50"
                 >
                   <div className="mb-3 flex h-8 w-8 items-center justify-center rounded-full bg-accent/10 text-xs font-semibold text-accent">
                     0{index + 1}
