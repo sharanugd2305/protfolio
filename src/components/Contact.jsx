@@ -87,13 +87,13 @@ export default function Contact() {
         </motion.div>
 
         <div className="reveal grid gap-8 lg:grid-cols-[0.88fr_1.12fr]">
-          <div className="rounded-[30px] border border-base-700/60 bg-base-900/35 p-6 sm:p-7">
+          <div className="contact-panel rounded-[30px] border border-base-700/60 bg-base-900/35 p-6 sm:p-7">
             <p className="text-[10px] font-semibold uppercase tracking-[0.18em] text-base-500">Get in touch</p>
 
             <div className="mt-6 space-y-4">
               <a
                 href={`mailto:${CONTACT_INFO.email}`}
-                className="group flex items-center gap-3 rounded-[20px] border border-base-700/60 bg-base-950/45 p-3 text-sm text-base-300 transition-colors hover:border-accent/30 hover:text-accent"
+                className="contact-link group flex items-center gap-3 rounded-[20px] border border-base-700/60 bg-base-950/45 p-3 text-sm text-base-300 transition-colors hover:border-accent/30 hover:text-accent"
               >
                 <span className="flex h-10 w-10 items-center justify-center rounded-xl border border-base-700/60 bg-base-900/60 text-base-200">
                   <svg className="h-4 w-4" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true">
@@ -108,7 +108,7 @@ export default function Contact() {
                 href={CONTACT_INFO.github}
                 target={CONTACT_INFO.github.startsWith("http") ? "_blank" : undefined}
                 rel={CONTACT_INFO.github.startsWith("http") ? "noopener noreferrer" : undefined}
-                className="group flex items-center gap-3 rounded-[20px] border border-base-700/60 bg-base-950/45 p-3 text-sm text-base-300 transition-colors hover:border-accent/30 hover:text-accent"
+                className="contact-link group flex items-center gap-3 rounded-[20px] border border-base-700/60 bg-base-950/45 p-3 text-sm text-base-300 transition-colors hover:border-accent/30 hover:text-accent"
               >
                 <span className="flex h-10 w-10 items-center justify-center rounded-xl border border-base-700/60 bg-base-900/60 text-base-200">
                   <svg className="h-4 w-4" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true">
@@ -122,7 +122,7 @@ export default function Contact() {
                 href={CONTACT_INFO.linkedin}
                 target={CONTACT_INFO.linkedin.startsWith("http") ? "_blank" : undefined}
                 rel={CONTACT_INFO.linkedin.startsWith("http") ? "noopener noreferrer" : undefined}
-                className="group flex items-center gap-3 rounded-[20px] border border-base-700/60 bg-base-950/45 p-3 text-sm text-base-300 transition-colors hover:border-accent/30 hover:text-accent"
+                className="contact-link group flex items-center gap-3 rounded-[20px] border border-base-700/60 bg-base-950/45 p-3 text-sm text-base-300 transition-colors hover:border-accent/30 hover:text-accent"
               >
                 <span className="flex h-10 w-10 items-center justify-center rounded-xl border border-base-700/60 bg-base-900/60 text-base-200">
                   <svg className="h-4 w-4" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true">
@@ -136,7 +136,7 @@ export default function Contact() {
                 href={CONTACT_INFO.resume}
                 target={CONTACT_INFO.resume.startsWith("http") ? "_blank" : undefined}
                 rel={CONTACT_INFO.resume.startsWith("http") ? "noopener noreferrer" : undefined}
-                className="group flex items-center gap-3 rounded-[20px] border border-base-700/60 bg-base-950/45 p-3 text-sm text-base-300 transition-colors hover:border-accent/30 hover:text-accent"
+                className="contact-link group flex items-center gap-3 rounded-[20px] border border-base-700/60 bg-base-950/45 p-3 text-sm text-base-300 transition-colors hover:border-accent/30 hover:text-accent"
               >
                 <span className="flex h-10 w-10 items-center justify-center rounded-xl border border-base-700/60 bg-base-900/60 text-base-200">
                   <svg className="h-4 w-4" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth="1.8" aria-hidden="true">
@@ -148,7 +148,7 @@ export default function Contact() {
             </div>
           </div>
 
-          <div className="rounded-[30px] border border-base-700/60 bg-base-900/35 p-6 sm:p-7">
+          <div className="contact-panel rounded-[30px] border border-base-700/60 bg-base-900/35 p-6 sm:p-7">
             <div className="mb-5 flex items-center justify-between gap-3">
               <div>
                 <p className="text-[10px] font-semibold uppercase tracking-[0.18em] text-base-500">Send a message</p>
