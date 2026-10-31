@@ -60,7 +60,7 @@ export default function TechStack({ highlightedTech, onTechClick }) {
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true, amount: 0.15 }}
               transition={{ duration: 0.45, delay: index * 0.05 }}
-              className="reveal rounded-[26px] border border-base-700/60 bg-base-900/35 p-5 shadow-[0_20px_32px_rgba(2,6,17,0.18)]"
+              className="tech-category reveal rounded-[26px] border border-base-700/60 bg-base-900/35 p-5 shadow-[0_20px_32px_rgba(2,6,17,0.18)]"
             >
               <div className="mb-4 flex items-center justify-between gap-3">
                 <h3 className="text-sm font-semibold uppercase tracking-[0.14em] text-base-300/90">
