@@ -31,7 +31,7 @@ function SystemGraphic() {
   ];
 
   return (
-    <div className="relative mx-auto max-w-xl rounded-[28px] border border-base-700/60 bg-base-900/70 p-4 shadow-[0_30px_80px_rgba(2,6,17,0.55)] ring-1 ring-white/5">
+    <div className="system-graphic relative mx-auto max-w-xl rounded-[28px] border border-base-700/60 bg-base-900/70 p-4 shadow-[0_30px_80px_rgba(2,6,17,0.55)] ring-1 ring-white/5">
       <div className="absolute inset-0 rounded-[28px] bg-[radial-gradient(circle_at_top_left,_rgba(34,211,197,0.12),_transparent_45%)]" aria-hidden="true" />
 
       <div className="relative overflow-hidden rounded-[22px] border border-base-700/60 bg-base-950/80 p-4">
@@ -175,7 +175,7 @@ export default function Hero() {
         >
           <div className="max-w-xl">
             <div className="mb-6 inline-flex items-center gap-2 rounded-full border border-accent/20 bg-base-900/60 px-3 py-1.5 text-[10px] font-medium uppercase tracking-[0.2em] text-accent backdrop-blur-sm">
-              <span className="h-1.5 w-1.5 rounded-full bg-accent" />
+              <span className="hero-status-dot h-1.5 w-1.5 rounded-full bg-accent" />
               Software engineering & ML
             </div>
 
