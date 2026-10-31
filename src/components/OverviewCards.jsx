@@ -32,7 +32,7 @@ export default function OverviewCards() {
         {CARDS.map((card, i) => (
           <div
             key={card.title}
-            className="reveal group relative overflow-hidden rounded-[22px] border border-base-700/50 bg-base-800/50 p-5 transition-all duration-300 hover:-translate-y-1 hover:border-accent/30 cursor-default"
+            className="overview-card reveal group relative overflow-hidden rounded-[22px] border border-base-700/50 bg-base-800/50 p-5 transition-all duration-300 hover:-translate-y-1 hover:border-accent/30 cursor-default"
             style={{ transitionDelay: `${i * 60}ms` }}
           >
             <div className="absolute inset-0 bg-[radial-gradient(circle_at_top,_rgba(34,211,197,0.10),_transparent_45%)] opacity-0 transition-opacity duration-300 group-hover:opacity-100" />
