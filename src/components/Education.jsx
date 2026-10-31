@@ -1,6 +1,6 @@
+﻿import { motion } from "motion/react";
 import { useScrollReveal } from "../hooks/useScrollReveal";
 
-// TODO: Replace placeholder values with your actual education details.
 const EDUCATION = {
   degree: "B.E. / B.Tech in Computer Science Engineering",
   university: "Your University / College Name",
@@ -21,35 +21,51 @@ export default function Education() {
   const ref = useScrollReveal();
 
   return (
-    <div ref={ref} className="mx-auto max-w-4xl px-5 py-12">
-      <div className="reveal relative p-6 sm:p-8 bg-base-800/40 border border-base-700/50 rounded-xl">
-        {/* Timeline accent */}
-        <div className="absolute top-8 left-0 w-0.5 h-10 bg-accent/50 rounded-full hidden sm:block" aria-hidden="true" />
+    <section className="mx-auto max-w-6xl px-5 py-20 sm:py-24" ref={ref}>
+      <motion.div
+        initial={{ opacity: 0, y: 24 }}
+        whileInView={{ opacity: 1, y: 0 }}
+        viewport={{ once: true, amount: 0.2 }}
+        transition={{ duration: 0.55, ease: "easeOut" }}
+        className="reveal relative overflow-hidden rounded-[30px] border border-white/10 bg-base-900/35 p-6 sm:p-8 lg:p-10"
+      >
+        <div className="absolute inset-0 bg-[radial-gradient(circle_at_top_right,_rgba(34,211,197,0.08),_transparent_35%)]" aria-hidden="true" />
 
-        <h2 className="text-sm font-semibold text-accent uppercase tracking-widest mb-1">
-          Education
-        </h2>
-        <h3 className="text-xl font-bold text-base-50 mb-1">{EDUCATION.degree}</h3>
-        <p className="text-base-300 text-sm mb-1">{EDUCATION.university}</p>
-        <p className="text-base-500 text-sm mb-1">{EDUCATION.duration}</p>
-        <p className="text-base-500 text-sm mb-4">{EDUCATION.expectedGraduation} &middot; {EDUCATION.cgpa}</p>
+        <div className="relative">
+          <div className="flex items-center gap-3">
+            <span className="inline-flex h-2.5 w-2.5 rounded-full bg-accent shadow-[0_0_12px_rgba(34,211,197,0.8)]" aria-hidden="true" />
+            <span className="eyebrow">Education</span>
+          </div>
 
-        <div>
-          <p className="text-xs font-medium text-base-400 uppercase tracking-wider mb-2">
-            Relevant Coursework
-          </p>
-          <div className="flex flex-wrap gap-2">
-            {EDUCATION.coursework.map((course) => (
-              <span
-                key={course}
-                className="px-2.5 py-1 text-xs text-base-300 bg-base-700/50 border border-base-600/40 rounded-md"
-              >
-                {course}
-              </span>
-            ))}
+          <div className="mt-6 grid gap-8 lg:grid-cols-[1.08fr_0.92fr] lg:items-end">
+            <div>
+              <p className="text-[10px] uppercase tracking-[0.2em] text-base-500">Academic foundation</p>
+              <h2 className="mt-4 text-2xl font-bold tracking-[-0.04em] text-base-50 sm:text-3xl">
+                {EDUCATION.degree}
+              </h2>
+              <p className="mt-3 text-base text-base-300">{EDUCATION.university}</p>
+              <p className="mt-1 text-sm text-base-400">{EDUCATION.duration}</p>
+              <p className="mt-1 text-sm text-base-500">{EDUCATION.expectedGraduation} &middot; {EDUCATION.cgpa}</p>
+            </div>
+
+            <div className="rounded-[24px] border border-base-700/60 bg-base-950/50 p-5">
+              <p className="text-[11px] font-semibold uppercase tracking-[0.18em] text-base-500">
+                Relevant coursework
+              </p>
+              <div className="mt-4 flex flex-wrap gap-2">
+                {EDUCATION.coursework.map((course) => (
+                  <span
+                    key={course}
+                    className="rounded-full border border-base-700/60 bg-base-800/60 px-3 py-1.5 text-xs font-medium text-base-200"
+                  >
+                    {course}
+                  </span>
+                ))}
+              </div>
+            </div>
           </div>
         </div>
-      </div>
-    </div>
+      </motion.div>
+    </section>
   );
 }
