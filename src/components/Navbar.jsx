@@ -1,4 +1,5 @@
-import { useState, useEffect } from "react";
+﻿import { useState, useEffect } from "react";
+import { motion } from "motion/react";
 
 const NAV_LINKS = [
   { label: "Home", href: "#home" },
@@ -7,11 +8,11 @@ const NAV_LINKS = [
   { label: "Contact", href: "#contact" },
 ];
 
-// TODO: Replace with your actual URLs
+// TODO: Replace with your actual URLs when they are available.
 const SOCIAL = {
-  github: "https://github.com/", // ← Your GitHub URL
-  linkedin: "https://linkedin.com/in/", // ← Your LinkedIn URL
-  resume: "#", // ← Your resume URL or file path
+  github: "https://github.com/",
+  linkedin: "https://linkedin.com/in/",
+  email: "mailto:your.email@example.com",
 };
 
 function GitHubIcon({ className }) {
@@ -30,6 +31,15 @@ function LinkedInIcon({ className }) {
   );
 }
 
+function MailIcon({ className }) {
+  return (
+    <svg className={className} viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true">
+      <rect x="2.5" y="4.5" width="19" height="15" rx="2.2" />
+      <path d="m4 7 8 6 8-6" />
+    </svg>
+  );
+}
+
 export default function Navbar({ activeSection }) {
   const [scrolled, setScrolled] = useState(false);
   const [mobileOpen, setMobileOpen] = useState(false);
@@ -40,17 +50,18 @@ export default function Navbar({ activeSection }) {
     return () => window.removeEventListener("scroll", handleScroll);
   }, []);
 
-  // Close mobile menu on Escape
   useEffect(() => {
-    const handleKey = (e) => {
-      if (e.key === "Escape") setMobileOpen(false);
+    const handleKey = (event) => {
+      if (event.key === "Escape") setMobileOpen(false);
     };
+
     if (mobileOpen) {
       document.addEventListener("keydown", handleKey);
       document.body.style.overflow = "hidden";
     } else {
       document.body.style.overflow = "";
     }
+
     return () => {
       document.removeEventListener("keydown", handleKey);
       document.body.style.overflow = "";
@@ -60,142 +71,159 @@ export default function Navbar({ activeSection }) {
   const handleNavClick = () => setMobileOpen(false);
 
   return (
-    <nav
+    <motion.nav
+      initial={{ y: -24, opacity: 0 }}
+      animate={{ y: 0, opacity: 1 }}
+      transition={{ duration: 0.45, ease: "easeOut" }}
       className={`fixed top-0 left-0 right-0 z-50 transition-all duration-300 ${
         scrolled
-          ? "bg-base-900/90 backdrop-blur-md border-b border-base-700/50 shadow-lg shadow-black/10"
+          ? "border-b border-white/10 bg-base-900/75 shadow-[0_18px_40px_rgba(2,6,17,0.3)] backdrop-blur-xl"
           : "bg-transparent"
       }`}
       aria-label="Main navigation"
     >
-      <div className="mx-auto max-w-6xl px-5 flex items-center justify-between h-16">
-        {/* Wordmark */}
+      <div className="mx-auto flex h-16 max-w-6xl items-center justify-between px-5">
         <a
           href="#home"
-          className="text-base-50 font-semibold text-lg tracking-tight hover:text-accent transition-colors"
+          className="inline-flex items-center rounded-full border border-transparent px-2.5 py-1.5 text-lg font-semibold tracking-tight text-base-50 transition-all duration-200 hover:border-accent/20 hover:text-accent"
         >
           Sharanu<span className="text-accent">.</span>
         </a>
 
-        {/* Desktop nav */}
-        <div className="hidden md:flex items-center gap-1">
+        <div className="hidden items-center gap-1 rounded-full border border-white/5 bg-base-900/40 px-1.5 py-1 shadow-[0_8px_20px_rgba(2,6,17,0.18)] backdrop-blur-md md:flex">
           {NAV_LINKS.map((link) => {
             const sectionId = link.href.replace("#", "");
             const isActive = activeSection === sectionId;
+
             return (
               <a
                 key={link.href}
                 href={link.href}
-                className={`relative px-3.5 py-2 text-sm font-medium transition-colors rounded-lg ${
+                aria-current={isActive ? "page" : undefined}
+                className={`relative rounded-full px-3.5 py-2 text-sm font-medium transition-all duration-200 ${
                   isActive
-                    ? "text-accent"
+                    ? "bg-accent/10 text-accent shadow-[inset_0_0_0_1px_rgba(34,211,197,0.12)]"
                     : "text-base-300 hover:text-base-100"
                 }`}
               >
                 {link.label}
                 {isActive && (
-                  <span className="absolute bottom-0.5 left-1/2 -translate-x-1/2 w-5 h-0.5 bg-accent rounded-full" />
+                  <span className="absolute -bottom-1 left-1/2 h-0.5 w-6 -translate-x-1/2 rounded-full bg-accent" />
                 )}
               </a>
             );
           })}
         </div>
 
-        {/* Right actions */}
-        <div className="hidden md:flex items-center gap-3">
+        <div className="hidden items-center gap-3 md:flex">
           <a
             href={SOCIAL.github}
-            target="_blank"
-            rel="noopener noreferrer"
-            className="text-base-400 hover:text-base-100 transition-colors"
-            aria-label="GitHub"
+            target={SOCIAL.github.startsWith("http") ? "_blank" : undefined}
+            rel={SOCIAL.github.startsWith("http") ? "noopener noreferrer" : undefined}
+            aria-label="GitHub profile"
+            className="inline-flex h-9 w-9 items-center justify-center rounded-md border border-base-700/60 bg-base-800/50 text-base-400 transition-colors duration-200 hover:border-accent/30 hover:text-base-100"
           >
-            <GitHubIcon className="w-5 h-5" />
+            <GitHubIcon className="h-4 w-4" />
           </a>
           <a
             href={SOCIAL.linkedin}
-            target="_blank"
-            rel="noopener noreferrer"
-            className="text-base-400 hover:text-base-100 transition-colors"
-            aria-label="LinkedIn"
+            target={SOCIAL.linkedin.startsWith("http") ? "_blank" : undefined}
+            rel={SOCIAL.linkedin.startsWith("http") ? "noopener noreferrer" : undefined}
+            aria-label="LinkedIn profile"
+            className="inline-flex h-9 w-9 items-center justify-center rounded-md border border-base-700/60 bg-base-800/50 text-base-400 transition-colors duration-200 hover:border-accent/30 hover:text-base-100"
           >
-            <LinkedInIcon className="w-5 h-5" />
+            <LinkedInIcon className="h-4 w-4" />
           </a>
           <a
-            href={SOCIAL.resume}
-            target="_blank"
-            rel="noopener noreferrer"
-            className="ml-1 px-4 py-1.5 text-sm font-medium bg-accent/10 text-accent border border-accent/20 rounded-lg hover:bg-accent/20 transition-colors"
+            href="#contact"
+            className="inline-flex items-center justify-center rounded-md border border-accent/30 bg-accent/10 px-4 py-2 text-sm font-medium text-accent transition-colors duration-200 hover:bg-accent/15"
           >
-            Resume
+            Contact
           </a>
         </div>
 
-        {/* Mobile hamburger */}
         <button
-          className="md:hidden relative w-8 h-8 flex items-center justify-center text-base-200"
-          onClick={() => setMobileOpen(!mobileOpen)}
+          type="button"
+          className="relative flex h-9 w-9 items-center justify-center rounded-md border border-base-700/60 bg-base-800/50 text-base-200 md:hidden"
+          onClick={() => setMobileOpen((open) => !open)}
           aria-label={mobileOpen ? "Close menu" : "Open menu"}
           aria-expanded={mobileOpen}
         >
           <span className="sr-only">{mobileOpen ? "Close" : "Menu"}</span>
           <span
-            className={`absolute w-5 h-0.5 bg-current transition-all duration-300 ${
+            className={`absolute h-0.5 w-5 bg-current transition-all duration-300 ${
               mobileOpen ? "rotate-45" : "-translate-y-1.5"
             }`}
           />
           <span
-            className={`absolute w-5 h-0.5 bg-current transition-all duration-300 ${
+            className={`absolute h-0.5 w-5 bg-current transition-all duration-300 ${
               mobileOpen ? "opacity-0" : "opacity-100"
             }`}
           />
           <span
-            className={`absolute w-5 h-0.5 bg-current transition-all duration-300 ${
+            className={`absolute h-0.5 w-5 bg-current transition-all duration-300 ${
               mobileOpen ? "-rotate-45" : "translate-y-1.5"
             }`}
           />
         </button>
       </div>
 
-      {/* Mobile menu overlay */}
       {mobileOpen && (
         <div
-          className="md:hidden fixed inset-0 top-16 bg-base-900/98 backdrop-blur-lg z-40"
+          className="fixed inset-0 top-16 z-40 bg-base-900/95 backdrop-blur-lg md:hidden"
           role="dialog"
           aria-modal="true"
         >
-          <div className="flex flex-col items-center justify-center gap-6 pt-20">
-            {NAV_LINKS.map((link, i) => {
+          <div className="flex flex-col items-center justify-center gap-6 pt-16">
+            {NAV_LINKS.map((link, index) => {
               const sectionId = link.href.replace("#", "");
               const isActive = activeSection === sectionId;
+
               return (
                 <a
                   key={link.href}
                   href={link.href}
                   onClick={handleNavClick}
-                  className={`text-2xl font-medium transition-colors animate-fade-in-up ${
+                  className={`text-2xl font-medium transition-colors duration-200 animate-fade-in-up ${
                     isActive ? "text-accent" : "text-base-200 hover:text-accent"
                   }`}
-                  style={{ animationDelay: `${i * 80}ms` }}
+                  style={{ animationDelay: `${index * 80}ms` }}
                 >
                   {link.label}
                 </a>
               );
             })}
-            <div className="flex items-center gap-5 mt-4 animate-fade-in-up" style={{ animationDelay: "320ms" }}>
-              <a href={SOCIAL.github} target="_blank" rel="noopener noreferrer" aria-label="GitHub" className="text-base-400 hover:text-base-100 transition-colors">
-                <GitHubIcon className="w-6 h-6" />
+
+            <div className="mt-4 flex items-center gap-4 animate-fade-in-up" style={{ animationDelay: "320ms" }}>
+              <a
+                href={SOCIAL.github}
+                target={SOCIAL.github.startsWith("http") ? "_blank" : undefined}
+                rel={SOCIAL.github.startsWith("http") ? "noopener noreferrer" : undefined}
+                aria-label="GitHub profile"
+                className="inline-flex h-11 w-11 items-center justify-center rounded-md border border-base-700/60 bg-base-800/50 text-base-400"
+              >
+                <GitHubIcon className="h-5 w-5" />
               </a>
-              <a href={SOCIAL.linkedin} target="_blank" rel="noopener noreferrer" aria-label="LinkedIn" className="text-base-400 hover:text-base-100 transition-colors">
-                <LinkedInIcon className="w-6 h-6" />
+              <a
+                href={SOCIAL.linkedin}
+                target={SOCIAL.linkedin.startsWith("http") ? "_blank" : undefined}
+                rel={SOCIAL.linkedin.startsWith("http") ? "noopener noreferrer" : undefined}
+                aria-label="LinkedIn profile"
+                className="inline-flex h-11 w-11 items-center justify-center rounded-md border border-base-700/60 bg-base-800/50 text-base-400"
+              >
+                <LinkedInIcon className="h-5 w-5" />
               </a>
-              <a href={SOCIAL.resume} target="_blank" rel="noopener noreferrer" className="px-5 py-2 text-sm font-medium bg-accent/10 text-accent border border-accent/20 rounded-lg">
-                Resume
+              <a
+                href={SOCIAL.email}
+                aria-label="Email"
+                className="inline-flex h-11 w-11 items-center justify-center rounded-md border border-base-700/60 bg-base-800/50 text-base-400"
+              >
+                <MailIcon className="h-5 w-5" />
               </a>
             </div>
           </div>
         </div>
       )}
-    </nav>
+    </motion.nav>
   );
 }
