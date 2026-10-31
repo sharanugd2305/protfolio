@@ -33,5 +33,4 @@ export const skills = [
   { name: "VS Code", icon: "💻" },
   { name: "Linux", icon: "🐧" },
   { name: "Docker", icon: "🐳" },
-  // Add or remove skills as needed...
 ];
